@@ -1,0 +1,196 @@
+shih-an@Shih-Ans-MacBook-Pro Desktop % sqlite3 acs-1-year-2015.sqlite
+SQLite version 3.43.2 2023-10-10 13:08:14
+Enter ".help" for usage hints.
+sqlite> .schema
+CREATE TABLE states (
+    year INTEGER , 
+    name TEXT , 
+    geo_id TEXT , 
+    total_population INTEGER , 
+    white INTEGER , 
+    black INTEGER , 
+    hispanic INTEGER , 
+    asian INTEGER , 
+    american_indian INTEGER , 
+    pacific_islander INTEGER , 
+    other_race INTEGER , 
+    median_age FLOAT , 
+    total_households INTEGER , 
+    owner_occupied_homes_median_value INTEGER , 
+    per_capita_income INTEGER , 
+    median_household_income INTEGER , 
+    below_poverty_line INTEGER, 
+    foreign_born_population INTEGER, 
+    state TEXT 
+);
+CREATE TABLE congressional_districts (
+    year INTEGER , 
+    name TEXT , 
+    geo_id TEXT , 
+    total_population INTEGER , 
+    white INTEGER , 
+    black INTEGER , 
+    hispanic INTEGER , 
+    asian INTEGER , 
+    american_indian INTEGER , 
+    pacific_islander INTEGER , 
+    other_race INTEGER , 
+    median_age FLOAT , 
+    total_households INTEGER , 
+    owner_occupied_homes_median_value INTEGER , 
+    per_capita_income INTEGER , 
+    median_household_income INTEGER , 
+    below_poverty_line INTEGER, 
+    foreign_born_population INTEGER, 
+    state TEXT,
+    congressional_district TEXT
+);
+CREATE TABLE places (
+    year INTEGER , 
+    name TEXT , 
+    geo_id TEXT , 
+    total_population INTEGER , 
+    white INTEGER , 
+    black INTEGER , 
+    hispanic INTEGER , 
+    asian INTEGER , 
+    american_indian INTEGER , 
+    pacific_islander INTEGER , 
+    other_race INTEGER , 
+    median_age FLOAT , 
+    total_households INTEGER , 
+    owner_occupied_homes_median_value INTEGER , 
+    per_capita_income INTEGER , 
+    median_household_income INTEGER , 
+    below_poverty_line INTEGER, 
+    foreign_born_population INTEGER, 
+    state TEXT,
+    place TEXT
+);
+CREATE INDEX "state_on_states" ON states(state);
+CREATE INDEX "state_cd_on_cdistricts" ON congressional_districts(state, congressional_district);
+CREATE INDEX "state_on_places" ON places(state);
+CREATE INDEX "name_on_states" ON states(name);
+CREATE INDEX "name_on_cdistricts" ON congressional_districts(name);
+CREATE INDEX "name_on_places" ON places(name);
+sqlite> SELECT name, per_capita_income
+   ...> FROM states
+   ...> ORDER BY per_capita_income ASC;
+Puerto Rico|18626
+Mississippi|40593
+Arkansas|41995
+West Virginia|42019
+Alabama|44765
+Kentucky|45215
+New Mexico|45382
+Louisiana|45727
+South Carolina|47238
+Tennessee|47275
+North Carolina|47830
+Idaho|48275
+Oklahoma|48568
+Florida|49426
+Montana|49509
+Missouri|50238
+Indiana|50532
+Ohio|51075
+Michigan|51084
+Georgia|51244
+Arizona|51492
+Maine|51494
+Nevada|52431
+South Dakota|53017
+Kansas|53906
+Oregon|54148
+Iowa|54736
+Nebraska|54996
+Wisconsin|55638
+Texas|55653
+Pennsylvania|55702
+Vermont|56990
+Rhode Island|58073
+Illinois|59588
+Wyoming|60214
+North Dakota|60557
+New York|60850
+Delaware|61255
+Utah|62912
+Minnesota|63488
+Colorado|63909
+Washington|64129
+California|64500
+Virginia|66262
+New Hampshire|70303
+Massachusetts|70628
+Connecticut|71346
+New Jersey|72222
+Alaska|73355
+Hawaii|73486
+District of Columbia|75628
+Maryland|75847
+sqlite> SELECT name, median_age
+   ...> FROM states
+   ...> ORDER BY median_age ASC;
+Utah|30.6
+Alaska|33.3
+District of Columbia|33.8
+Texas|34.4
+North Dakota|34.9
+Idaho|35.8
+Nebraska|36.1
+California|36.2
+Kansas|36.2
+Oklahoma|36.3
+Colorado|36.4
+Georgia|36.4
+Louisiana|36.4
+Wyoming|36.5
+South Dakota|36.9
+Mississippi|37.0
+Arizona|37.4
+New Mexico|37.4
+Indiana|37.5
+Washington|37.5
+Hawaii|37.7
+Illinois|37.7
+Nevada|37.8
+Virginia|37.8
+Arkansas|37.9
+Minnesota|37.9
+Iowa|38.1
+Maryland|38.3
+New York|38.3
+Missouri|38.4
+North Carolina|38.4
+Alabama|38.7
+Tennessee|38.7
+Kentucky|38.8
+South Carolina|39.0
+Oregon|39.1
+Ohio|39.3
+Massachusetts|39.4
+Wisconsin|39.4
+New Jersey|39.6
+Delaware|39.7
+Michigan|39.7
+Rhode Island|39.7
+Montana|39.9
+Puerto Rico|40.0
+Connecticut|40.6
+Pennsylvania|40.7
+Florida|41.8
+West Virginia|42.2
+New Hampshire|42.8
+Vermont|43.1
+Maine|44.6
+SELECT name, below_poverty_line
+FROM congressional_districts 
+ORDER BY below_poverty_line ASC;
+
+SELECT name, foreign_born_population
+FROM states
+ORDER BY foreign_born_population DESC;
+
+SELECT name, asian
+FROM places
+ORDER BY asian ASC;
